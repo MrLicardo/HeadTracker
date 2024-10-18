@@ -55,7 +55,7 @@ jobs:
         run: |
           cd gui/src
           ls
-          qmake HeadTracker.pro
+          qmake -arch arm64 HeadTracker.pro
           make
 
       - name: prepare output
