@@ -6,14 +6,14 @@ on:
       - master
       - v2.2x
     paths:
-      - '.github/workflows/build-gui.yml'
+      - '.github/workflows/build-gui_win.yml'
       - 'gui/src/**'
 
   pull_request:
     branches:
       - master
     paths:
-      - '.github/workflows/build-gui.yml'
+      - '.github/workflows/build-gui_win.yml'
       - 'gui/src/**'
 
   workflow_dispatch:
@@ -26,11 +26,18 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
         with:
+          submodules: recursive
           fetch-depth: 0
+
+      - name: Configure MSVC
+        uses: TheMrMilchmann/setup-msvc-dev@v3
+        with:
+          arch: x64
+          spectre: true
 
       - name: Cache Qt
         id: cache-qt
-        uses: actions/cache@v1
+        uses: actions/cache@v4
         with:
           path: qt/
           key: ${{ runner.os }}-QtCache
@@ -43,15 +50,15 @@ jobs:
           target: 'desktop'
           install-deps: 'true'
           modules: 'qtserialport'
-          arch: 'win64_mingw'
+          arch: 'win64_msvc2022_64'
           dir: '${{ github.workspace }}/qt'
           cached: ${{ steps.cache-qt.outputs.cache-hit }}
 
-      - name: Set up MinGW
-        uses: egor-tensin/setup-mingw@v2
-        with:
-            platform: x64
-            static: 0
+      - name: Install NSIS
+        run: |
+             Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')
+             scoop bucket add extras
+             scoop install nsis
             
       - name: Build
         working-directory: ${{github.workspace}}
@@ -59,14 +66,7 @@ jobs:
           cd gui/src
           dir
           qmake HeadTracker.pro
-          mingw32-make
-
-#      - name: Setup tmate session
-#        uses: mxschmitt/action-tmate@v3
-#        with:
-#          limit-access-to-actor: true
-#        if: ${{ failure() }}
-#        timeout-minutes: 15
+          nmake
 
       - name: WinDeployQT
         working-directory: ${{github.workspace}}
@@ -79,10 +79,18 @@ jobs:
           curl -L -o bossac.exe https://github.com/dlktdr/HeadTracker/raw/master/gui/bin/bossac.exe
           windeployqt HeadTracker.exe
 
+      - name: Make NSIS installer
+        working-directory: ${{github.workspace}}
+        run: |
+             move output deploy\windows\nsis\
+             cd deploy\windows\nsis
+             makensis /X"SetCompressor /FINAL lzma" setup.nsi
+             ren *.exe headtracker_win_installer.exe
+
       - name: Archive production artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: headtracker_win
-          path: ${{github.workspace}}/output
-          retention-days: 60
+          name: headtracker_win_installer.exe
+          path: deploy/windows/nsis/headtracker_win_installer.exe
+          retention-days: 90
 
