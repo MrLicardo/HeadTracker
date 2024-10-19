@@ -20,6 +20,7 @@
 // If this is the Sense board. Enable the IMU
 #if defined(CONFIG_BOARD_XIAO_BLE_NRF52840_SENSE)
 #define HAS_LSM6DS3
+#define HAS_QMC5883
 #endif
 
 // Mapping Analog numbers to Analog pins
