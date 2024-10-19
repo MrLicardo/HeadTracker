@@ -20,12 +20,13 @@ on:
 
 jobs:
   build:
-    runs-on:ubuntu-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Check out the repo
         uses: actions/checkout@v4
         with:
+          submodules: recursive
           fetch-depth: 0
 
       - name: Install Qt
@@ -79,4 +80,3 @@ jobs:
           name: headtracker_linux_appimage
           path: ${{github.workspace}}/HeadTracker*.AppImage
           retention-days: 90
-
