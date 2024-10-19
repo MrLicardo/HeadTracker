@@ -66,7 +66,7 @@ jobs:
           cd gui/src
           dir
           qmake HeadTracker.pro CONFIG+=release
-          nmake
+          mingw32-make
 
       - name: WinDeployQT
         working-directory: ${{github.workspace}}
