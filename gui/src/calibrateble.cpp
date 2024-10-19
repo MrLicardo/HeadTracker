@@ -162,16 +162,7 @@ void CalibrateBLE::showEvent(QShowEvent *event)
 {
     Q_UNUSED(event);
     ui->chkUseMagnetometer->setChecked(!trkset->getDisMag());
-    if(trkset->hardware().contains("XIAO")) {
-        hasMagnetometer = false;
-        if(step == STEP_MAGINTRO || step == STEP_MAGCAL) {
-            step = STEP_ACCELCAL;
-            ui->stackedWidget->setCurrentIndex(step);
-            setButtonText();
-        }
-    }
-     else
-        hasMagnetometer = true;
+    hasMagnetometer = true;
 }
 
 void CalibrateBLE::nextClicked()
