@@ -36,6 +36,11 @@ jobs:
           submodules: recursive
           fetch-depth: 0
 
+      - name: Uninstall p7zip
+        working-directory: ${{github.workspace}}
+        run: |
+          brew uninstall p7zip
+
       - name: Install Qt
         uses: jurplel/install-qt-action@v4
         with:
