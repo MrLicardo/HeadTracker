@@ -69,5 +69,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: HeadTracker_MacOs
-          path: ${{github.workspace}}/output/HeadTracker.app
-          retention-days: 60
+          path: ${{github.workspace}}/output
+          retention-days: 90
