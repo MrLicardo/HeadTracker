@@ -36,13 +36,13 @@ void Graph::paintEvent(QPaintEvent *event)
     painter.setRenderHint(QPainter::Antialiasing,true);
 
     // Background
-    QLinearGradient lg(0,0,0,height());
-    QColor bg(qRgb(153, 201, 255));
-    lg.setColorAt(0,bg.lighter(120));
-    lg.setColorAt(0.5,bg);
-    lg.setColorAt(1,bg.lighter(120));
-    painter.setBrush(QBrush(lg));
-    painter.drawRect(rect().adjusted(0,0,-1,-1));
+    // QLinearGradient lg(0,0,0,height());
+    // QColor bg(qRgb(153, 201, 255));
+    // lg.setColorAt(0,bg.lighter(120));
+    // lg.setColorAt(0.5,bg);
+    // lg.setColorAt(1,bg.lighter(120));
+    // painter.setBrush(QBrush(lg));
+    // painter.drawRect(rect().adjusted(0,0,-1,-1));
 
     // Zero Line
 
