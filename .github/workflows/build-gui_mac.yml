@@ -146,5 +146,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: HeadTracker_MacOs
-          path: ${{github.workspace}}/output/dmg
+          path: ${{github.workspace}}/output
           retention-days: 60
