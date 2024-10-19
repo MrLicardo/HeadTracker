@@ -82,7 +82,7 @@ jobs:
       - name: Make NSIS installer
         working-directory: ${{github.workspace}}
         run: |
-             move output deploy\windows\nsis\
+             move output deploy\windows\nsis
              cd deploy\windows\nsis
              makensis /X"SetCompressor /FINAL lzma" setup.nsi
              ren *.exe headtracker_win_installer.exe
