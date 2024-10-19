@@ -29,12 +29,6 @@ jobs:
           submodules: recursive
           fetch-depth: 0
 
-      - name: Set up MinGW
-        uses: egor-tensin/setup-mingw@v2
-        with:
-            platform: x64
-            static: 0
-
       - name: Cache Qt
         id: cache-qt
         uses: actions/cache@v4
@@ -54,18 +48,18 @@ jobs:
           dir: '${{ github.workspace }}/qt'
           cached: ${{ steps.cache-qt.outputs.cache-hit }}
 
-      - name: Install NSIS
-        run: |
-             Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')
-             scoop bucket add extras
-             scoop install nsis
+      - name: Set up MinGW
+        uses: egor-tensin/setup-mingw@v2
+        with:
+            platform: x64
+            static: 0
             
       - name: Build
         working-directory: ${{github.workspace}}
         run: |
           cd gui/src
           dir
-          qmake HeadTracker.pro CONFIG+=release
+          qmake HeadTracker.pro
           mingw32-make
 
       - name: WinDeployQT
@@ -79,19 +73,9 @@ jobs:
           curl -L -o bossac.exe https://github.com/dlktdr/HeadTracker/raw/master/gui/bin/bossac.exe
           windeployqt HeadTracker.exe
 
-      - name: Make NSIS installer
-        working-directory: ${{github.workspace}}
-        run: |
-             mkdir deploy/windows/nsis
-             move output deploy/windows/nsis/
-             cd deploy/windows/nsis
-             makensis /X"SetCompressor /FINAL lzma" setup.nsi
-             ren *.exe headtracker_win_installer.exe
-
       - name: Archive production artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: headtracker_win_installer.exe
-          path: deploy/windows/nsis/headtracker_win_installer.exe
+          name: headtracker_win
+          path: ${{github.workspace}}/output
           retention-days: 90
-
