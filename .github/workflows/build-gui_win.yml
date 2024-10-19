@@ -82,6 +82,7 @@ jobs:
       - name: Make NSIS installer
         working-directory: ${{github.workspace}}
         run: |
+             mkdir deploy/windows/nsis
              move output deploy/windows/nsis/
              cd deploy/windows/nsis
              makensis /X"SetCompressor /FINAL lzma" setup.nsi
