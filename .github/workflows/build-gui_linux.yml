@@ -20,7 +20,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on:ubuntu-latest
 
     steps:
       - name: Check out the repo
@@ -31,11 +31,11 @@ jobs:
       - name: Install Qt
         uses: jurplel/install-qt-action@v4
         with:
-          aqtversion: '==2.1.*'
+          aqtversion: '==3.1.*'
           version: '6.4.1'
           target: 'desktop'
-          modules: 'qtserialport'
           install-deps: 'true'
+          modules: 'qtserialport'
 
       - name: Build
         working-directory: ${{github.workspace}}
@@ -78,5 +78,5 @@ jobs:
         with:
           name: headtracker_linux_appimage
           path: ${{github.workspace}}/HeadTracker*.AppImage
-          retention-days: 60
+          retention-days: 90
 
