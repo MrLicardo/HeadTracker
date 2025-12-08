@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>380</width>
-    <height>531</height>
+    <height>434</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <item>
     <widget class="QStackedWidget" name="stkWidget">
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="page">
       <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -80,22 +80,15 @@
          </item>
          <item row="0" column="1" colspan="2">
           <widget class="QComboBox" name="cmbSource">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
-           <item>
-            <property name="text">
-             <string>Github - Stable</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Github - Testing</string>
-            </property>
-           </item>
            <item>
             <property name="text">
              <string>Local File</string>
@@ -113,7 +106,10 @@
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="label_13">
+        <widget class="QLabel" name="lblFirmware">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
          <property name="text">
           <string>Firmware</string>
          </property>
@@ -140,6 +136,9 @@
            </property>
            <item>
             <widget class="QListWidget" name="lstFirmwares">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
              <property name="sizePolicy">
               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Maximum">
                <horstretch>0</horstretch>
@@ -167,7 +166,10 @@
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="label_10">
+        <widget class="QLabel" name="lblFileDetails">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
          <property name="text">
           <string>File Details</string>
          </property>
@@ -175,6 +177,9 @@
        </item>
        <item>
         <widget class="QTableWidget" name="infoTable">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
          <property name="sizePolicy">
           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
            <horstretch>0</horstretch>
@@ -203,6 +208,19 @@
           <bool>false</bool>
          </attribute>
         </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
        </item>
       </layout>
      </widget>
@@ -266,7 +284,6 @@
         <widget class="QLabel" name="label_8">
          <property name="font">
           <font>
-           <weight>75</weight>
            <bold>true</bold>
           </font>
          </property>
@@ -301,7 +318,6 @@
         <widget class="QLabel" name="label_6">
          <property name="font">
           <font>
-           <weight>75</weight>
            <bold>true</bold>
           </font>
          </property>
@@ -314,7 +330,6 @@
         <widget class="QLabel" name="label_7">
          <property name="font">
           <font>
-           <weight>75</weight>
            <bold>true</bold>
           </font>
          </property>
@@ -356,7 +371,6 @@
         <widget class="QLabel" name="label_5">
          <property name="font">
           <font>
-           <weight>75</weight>
            <bold>true</bold>
           </font>
          </property>
@@ -391,7 +405,6 @@
         <widget class="QLabel" name="label_4">
          <property name="font">
           <font>
-           <weight>75</weight>
            <bold>true</bold>
           </font>
          </property>
@@ -411,7 +424,6 @@
         <widget class="QLabel" name="label_14">
          <property name="font">
           <font>
-           <weight>75</weight>
            <bold>true</bold>
           </font>
          </property>

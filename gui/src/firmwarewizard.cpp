@@ -45,6 +45,12 @@ FirmwareWizard::FirmwareWizard(QWidget *parent) :
 
     // Call discover to get a current list of ports before connecting the signal
     connect(this, &FirmwareWizard::comPortConnected,this, &FirmwareWizard::comPortConnect);
+
+    /* Temporary until new online firmware system is ready */
+    ui->lblFileDetails->setVisible(false);
+    ui->lblFirmware->setVisible(false);
+    ui->infoTable->setVisible(false);
+    ui->lstFirmwares->setVisible(false);
 }
 
 FirmwareWizard::~FirmwareWizard()
@@ -92,7 +98,7 @@ void FirmwareWizard::addToLog(QString l)
 // Load a file from the local computer, on user click ... button
 void FirmwareWizard::loadLocalFirmware()
 {
-    QString filename = QFileDialog::getOpenFileName(this,tr("Open File"),QString(),tr("Fimware files (*.hex *.bin)"));
+    QString filename = QFileDialog::getOpenFileName(this,tr("Open File"),QString(),tr("Fimware files (*.bin)"));
     if(!filename.isEmpty()) {
         //localfirmfile = filename; // Save not-encoded
         firmwarefile = "file://" + filename;
